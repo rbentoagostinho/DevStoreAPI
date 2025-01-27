@@ -16,12 +16,21 @@ public class Program
 {
     public static void Main(string[] args)
     {
+        // Configura o Serilog para registrar logs no console e em arquivos
+        Log.Logger = new LoggerConfiguration()
+            .WriteTo.Console()
+            .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day) // Armazena logs em arquivos
+            .CreateLogger();
+
         try
         {
             Log.Information("Starting web application");
 
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-            builder.AddDefaultLogging();
+
+            // Adiciona o Serilog para logs padrão
+            builder.Logging.ClearProviders(); // Limpa os provedores de log padrão
+            builder.Logging.AddSerilog(); // Adiciona o Serilog como o provedor de log
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
@@ -74,10 +83,12 @@ public class Program
         }
         catch (Exception ex)
         {
+            // Log a fatal error if something goes wrong
             Log.Fatal(ex, "Application terminated unexpectedly");
         }
         finally
         {
+            // Garante que todos os logs pendentes sejam escritos ao final
             Log.CloseAndFlush();
         }
     }

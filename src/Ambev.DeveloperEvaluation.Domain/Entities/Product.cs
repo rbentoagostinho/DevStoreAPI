@@ -81,7 +81,11 @@ public class Product : BaseEntity
         return new ValidationResultDetail
         {
             IsValid = result.IsValid,
-            Errors = result.Errors.Select(o => (ValidationErrorDetail)o)
+            Errors = result.Errors.Select(o => new ValidationErrorDetail
+            {
+                Error = o.ErrorMessage,
+                Detail = o.PropertyName
+            })
         };
     }
 }

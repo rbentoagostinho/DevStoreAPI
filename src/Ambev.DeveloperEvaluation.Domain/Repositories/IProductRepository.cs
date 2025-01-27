@@ -9,7 +9,7 @@ public interface IProductRepository
 {
     Task<Product> CreateAsync(Product product);
     Task<Product?> GetByIdAsync(Guid id);
-    Task<IEnumerable<Product>> GetAllAsync(int _page = 1, int _size = 10, string _order = "");
+    Task<IEnumerable<Product>> GetAllAsync(int _page = 1, int _size = 10, string _order = "", CancellationToken cancellationToken = default);
     Task<Product> UpdateAsync(Product product);
     Task<bool> DeleteAsync(Guid id);
 }
