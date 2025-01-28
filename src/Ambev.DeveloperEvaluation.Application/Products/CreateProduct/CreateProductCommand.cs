@@ -5,7 +5,7 @@ namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
 /// <summary>
 /// Command for creating a new product
 /// </summary>
-public record CreateSaleItemCommand : IRequest<CreateSaleItemResult>
+public record CreateProductCommand : IRequest<CreateProductResult>
 {
     public string Title { get; init; }
     public string Description { get; init; }

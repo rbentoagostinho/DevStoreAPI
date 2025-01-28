@@ -1,28 +1,21 @@
-﻿using Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
+﻿using AutoMapper;
+using Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
 using Ambev.DeveloperEvaluation.WebApi.Models;
-using AutoMapper;
 
-namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 
 /// <summary>
-/// Mapping profile for CreateProductCommand and CreateProductResult
+/// Profile for mapping between Application and API CreateSale responses
 /// </summary>
 public class CreateSaleProfile : Profile
 {
+    /// <summary>
+    /// Initializes the mappings for CreateSale feature
+    /// </summary>
     public CreateSaleProfile()
     {
-        CreateMap<CreateSaleRequest, CreateSaleItemCommand > ();
-        CreateMap<CreateSaleItemResult, CreateSaleResponse>();
+        CreateMap<CreateSaleRequest, CreateSaleCommand>();
+        CreateMap<CreateSaleResult, CreateSaleResponse>();
     }
 }
-
-
-
-
-
-
-
-
-
-

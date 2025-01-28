@@ -1,4 +1,4 @@
-﻿namespace Ambev.DeveloperEvaluation.Application.Sales.GetSaleItem;
+﻿namespace Ambev.DeveloperEvaluation.Application.SaleItems.GetSaleItem;
 
 /// <summary>
 /// Represents the response returned after successfully retrieving a sale item.

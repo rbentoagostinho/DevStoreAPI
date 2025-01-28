@@ -1,7 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
-using MediatR;
-
-namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSaleItem;
+﻿using MediatR;
+namespace Ambev.DeveloperEvaluation.Application.SaleItems.CreateSaleItem;
 
 /// <summary>
 /// Command for creating a new sale item.

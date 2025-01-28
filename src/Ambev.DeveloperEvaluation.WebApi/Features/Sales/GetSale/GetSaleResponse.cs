@@ -1,59 +1,52 @@
-﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProduct
+﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSale;
+
+/// <summary>
+/// API response model for GetSale operation
+/// </summary>
+public class GetSaleResponse
 {
     /// <summary>
-    /// Response model for getting a product
+    /// The unique identifier of the sale
     /// </summary>
-    public class GetSaleResponse
-    {
-        /// <summary>
-        /// The unique identifier of the product
-        /// </summary>
-        public Guid Id { get; set; }
-
-        /// <summary>
-        /// The title of the product
-        /// </summary>
-        public string Title { get; set; } = string.Empty;
-
-        /// <summary>
-        /// The description of the product
-        /// </summary>
-        public string Description { get; set; } = string.Empty;
-
-        /// <summary>
-        /// The price of the product
-        /// </summary>
-        public decimal Price { get; set; }
-
-        /// <summary>
-        /// The category of the product
-        /// </summary>
-        public string Category { get; set; } = string.Empty;
-
-        /// <summary>
-        /// The image URL of the product
-        /// </summary>
-        public string Image { get; set; } = string.Empty;
-
-        /// <summary>
-        /// The rating of the product
-        /// </summary>
-        public GetProductRatingResponse Rating { get; set; } = new GetProductRatingResponse();
-    }
+    public Guid Id { get; set; }
 
     /// <summary>
-    /// Represents the rating of a product in the response
+    /// The sale number
     /// </summary>
-    public class GetProductRatingResponse
-    {
-        /// <summary>
-        /// The rating value
-        /// </summary>
-        public decimal Rate { get; set; }
+    public string SaleNumber { get; set; } = string.Empty;
 
-        /// <summary>
-        /// The count of ratings
-        /// </summary>
-        public int Count { get; set; }
-    }
+    /// <summary>
+    /// The date of the sale
+    /// </summary>
+    public DateTime SaleDate { get; set; }
+
+    /// <summary>
+    /// The customer's unique identifier
+    /// </summary>
+    public Guid CustomerId { get; set; }
+
+    /// <summary>
+    /// The customer's name
+    /// </summary>
+    public string CustomerName { get; set; } = string.Empty;
+
+    /// <summary>
+    /// The total amount of the sale
+    /// </summary>
+    public decimal TotalAmount { get; set; }
+
+    /// <summary>
+    /// The branch where the sale occurred
+    /// </summary>
+    public string Branch { get; set; } = string.Empty;
+
+    /// <summary>
+    /// The list of items in the sale
+    /// </summary>
+    public List<SaleItemResponse> Items { get; set; } = new List<SaleItemResponse>();
+
+    /// <summary>
+    /// Indicates whether the sale is cancelled
+    /// </summary>
+    public bool IsCancelled { get; set; }
 }

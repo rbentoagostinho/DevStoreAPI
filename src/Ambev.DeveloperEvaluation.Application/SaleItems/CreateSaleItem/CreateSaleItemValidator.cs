@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSaleItem;
+namespace Ambev.DeveloperEvaluation.Application.SaleItems.CreateSaleItem;
 
 /// <summary>
 /// Validator for CreateSaleItemCommand.

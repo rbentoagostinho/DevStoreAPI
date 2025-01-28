@@ -3,9 +3,9 @@ using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Ambev.DeveloperEvaluation.Domain.Entities;
 using AutoMapper;
 using FluentValidation;
-using Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
+using Ambev.DeveloperEvaluation.Application.SaleItems.CreateSaleItem;
 
-namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSaleItem;
+namespace Ambev.DeveloperEvaluation.Application.SaleItems.CreateSale;
 
 /// <summary>
 /// Handler for processing CreateSaleItemCommand requests.
@@ -48,7 +48,7 @@ public class CreateSaleItemHandler : IRequestHandler<CreateSaleItemCommand, Crea
         saleItem.CalculateTotalPrice();
 
         // Save the sale item to the database
-        var createdSaleItem = await _saleItemRepository.CreateAsync(saleItem, cancellationToken);
+        var createdSaleItem = await _saleItemRepository.CreateAsync(saleItem);
 
         // Map the result to a CreateSaleItemResult
         var result = _mapper.Map<CreateSaleItemResult>(createdSaleItem);

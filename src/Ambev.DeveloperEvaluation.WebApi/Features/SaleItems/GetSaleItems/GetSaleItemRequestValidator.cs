@@ -1,20 +1,17 @@
-﻿using FluentValidation;
+﻿using Ambev.DeveloperEvaluation.WebApi.Features.SaleItems.GetSaleItems;
+using FluentValidation;
 
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProduct;
+namespace Ambev.DeveloperEvaluation.WebApi.Features.SaleItems.GetSaleItems;
 
 /// <summary>
-/// Validator for GetProductsRequest that defines validation rules for getting a product
+/// Validator for GetSaleItemRequest
 /// </summary>
-public class GetSaleRequestValidator : AbstractValidator<GetSaleRequest>
+public class GetSaleItemRequestValidator : AbstractValidator<GetSaleItemRequest>
 {
-    /// <summary>
-    /// Initializes a new instance of the GetProductsRequestValidator with defined validation rules.
-    /// </summary>
-    public GetSaleRequestValidator()
+    public GetSaleItemRequestValidator()
     {
-        RuleFor(request => request.Id).NotEmpty().WithMessage("Product ID is required");
+        RuleFor(x => x.Id).NotEmpty().WithMessage("Sale item ID is required");
     }
 }
-
 
 

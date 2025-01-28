@@ -3,7 +3,7 @@
 /// <summary>
 /// Result model for CreateProduct operation
 /// </summary>
-public class CreateSaleItemResult
+public class CreateProductResult
 {
     public Guid Id { get; set; }
     public string Title { get; set; }

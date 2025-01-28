@@ -1,60 +1,16 @@
-﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
+﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 
 /// <summary>
-/// Represents the response returned after successfully creating a new product.
+/// API response model for CreateSale operation
 /// </summary>
 public class CreateSaleResponse
 {
-    /// <summary>
-    /// Gets or sets the unique identifier of the newly created product.
-    /// </summary>
     public Guid Id { get; set; }
-
-    /// <summary>
-    /// Gets or sets the product title.
-    /// </summary>
-    public string Title { get; set; } = string.Empty;
-
-    /// <summary>
-    /// Gets or sets the product description.
-    /// </summary>
-    public string Description { get; set; } = string.Empty;
-
-    /// <summary>
-    /// Gets or sets the product price.
-    /// </summary>
-    public decimal Price { get; set; }
-
-    /// <summary>
-    /// Gets or sets the product category.
-    /// </summary>
-    public string Category { get; set; } = string.Empty;
-
-    /// <summary>
-    /// Gets or sets the product image URL.
-    /// </summary>
-    public string Image { get; set; } = string.Empty;
-
-    /// <summary>
-    /// Gets or sets the product rating.
-    /// </summary>
-    public RatingResponse Rating { get; set; } = new RatingResponse();
+    public string SaleNumber { get; set; } = string.Empty;
+    public DateTime SaleDate { get; set; }
+    public Guid CustomerId { get; set; }
+    public string CustomerName { get; set; } = string.Empty;
+    public string Branch { get; set; } = string.Empty;
+    public decimal TotalAmount { get; set; }
+    public List<SaleItemResponse> Items { get; set; } = new List<SaleItemResponse>();
 }
-
-/// <summary>
-/// Represents the rating of a product in the response.
-/// </summary>
-public class RatingResponse
-{
-    /// <summary>
-    /// Gets or sets the rating value.
-    /// </summary>
-    public decimal Rate { get; set; }
-
-    /// <summary>
-    /// Gets or sets the count of ratings.
-    /// </summary>
-    public int Count { get; set; }
-}
-
-

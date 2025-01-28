@@ -6,12 +6,12 @@ namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
 /// <summary>
 /// Mapping profile for CreateProductCommand and CreateProductResult
 /// </summary>
-public class CreateSaleItemProfile : Profile
+public class CreateProductProfile : Profile
 {
-    public CreateSaleItemProfile()
+    public CreateProductProfile()
     {
-        CreateMap<CreateSaleItemCommand, Product>();
-        CreateMap<Product, CreateSaleItemResult>();
+        CreateMap<CreateProductCommand, Product>();
+        CreateMap<Product, CreateProductResult>();
     }
 }
 

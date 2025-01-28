@@ -5,12 +5,12 @@ namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
 /// <summary>
 /// Validator for CreateProductCommand
 /// </summary>
-public class CreateSaleItemValidator : AbstractValidator<CreateSaleItemCommand>
+public class CreateProductValidator : AbstractValidator<CreateProductCommand>
 {
     /// <summary>
     /// Initializes validation rules for CreateProductCommand
     /// </summary>
-    public CreateSaleItemValidator()
+    public CreateProductValidator()
     {
         RuleFor(x => x.Title)
             .NotEmpty().WithMessage("Title is required")

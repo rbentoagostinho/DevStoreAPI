@@ -1,15 +1,11 @@
-﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProduct;
-
-/// <summary>
-/// Request model for getting a product by ID
-/// </summary>
-public class GetSaleRequest
+﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.SaleItems.GetSaleItems
 {
     /// <summary>
-    /// The unique identifier of the product to retrieve
+    /// Request model for getting a sale item by ID
     /// </summary>
-    public Guid Id { get; set; }
+    public class GetSaleItemRequest
+    {
+        public Guid Id { get; set; }
+    }
 }
-
-
 

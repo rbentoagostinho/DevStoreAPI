@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Ambev.DeveloperEvaluation.Application.Sales.GetSaleItem;
+namespace Ambev.DeveloperEvaluation.Application.SaleItems.GetSaleItem;
 
 /// <summary>
 /// Validator for GetSaleItemCommand.

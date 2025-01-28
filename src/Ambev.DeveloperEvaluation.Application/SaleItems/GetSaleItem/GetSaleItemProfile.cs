@@ -2,7 +2,7 @@
 using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Application.Products.GetProduct;
 
-namespace Ambev.DeveloperEvaluation.Application.Sales.GetSaleItem;
+namespace Ambev.DeveloperEvaluation.Application.SaleItems.GetSaleItem;
 
 /// <summary>
 /// Profile for mapping between SaleItem entity and GetSaleItemResult.

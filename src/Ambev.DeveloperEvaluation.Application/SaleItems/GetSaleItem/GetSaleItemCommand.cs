@@ -1,7 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Products.GetProduct;
 using MediatR;
 
-namespace Ambev.DeveloperEvaluation.Application.Sales.GetSaleItem;
+namespace Ambev.DeveloperEvaluation.Application.SaleItems.GetSaleItem;
 
 /// <summary>
 /// Command for retrieving a sale item by its ID.

@@ -4,7 +4,7 @@ using AutoMapper;
 using FluentValidation;
 using Ambev.DeveloperEvaluation.Application.Products.GetProduct;
 
-namespace Ambev.DeveloperEvaluation.Application.Sales.GetSaleItem;
+namespace Ambev.DeveloperEvaluation.Application.SaleItems.GetSaleItem;
 
 /// <summary>
 /// Handler for processing GetSaleItemCommand requests.
@@ -41,7 +41,7 @@ public class GetSaleItemHandler : IRequestHandler<GetSaleItemCommand, GetSaleIte
             throw new ValidationException(validationResult.Errors);
 
         // Retrieve the sale item from the repository
-        var saleItem = await _saleItemRepository.GetByIdAsync(request.Id, cancellationToken);
+        var saleItem = await _saleItemRepository.GetByIdAsync(request.Id);
 
         if (saleItem == null)
             throw new KeyNotFoundException($"Sale item with ID {request.Id} not found.");

@@ -1,23 +1,19 @@
 ﻿using AutoMapper;
-using Ambev.DeveloperEvaluation.Domain.Entities;
-using Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProduct;
-using Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
+using Ambev.DeveloperEvaluation.Application.Sales.GetSale;
 
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Products;
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSale;
 
 /// <summary>
-/// AutoMapper profile for mapping Product to GetProductsResponse.
+/// Profile for mapping GetSale feature requests to commands
 /// </summary>
 public class GetSaleProfile : Profile
 {
+    /// <summary>
+    /// Initializes the mappings for GetSale feature
+    /// </summary>
     public GetSaleProfile()
     {
-        CreateMap<Product, GetSaleResponse>()
-            .ForMember(dest => dest.Rating, opt => opt.MapFrom(src => new RatingResponse
-            {
-                Rate = src.Rating.Rate,
-                Count = src.Rating.Count
-            }));
+        CreateMap<Guid, GetSaleCommand>()
+            .ConstructUsing(id => new GetSaleCommand(id));
     }
 }
-
