@@ -1,46 +1,58 @@
-﻿using AutoMapper;
-using MediatR;
-using FluentValidation;
+﻿using MediatR;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Ambev.DeveloperEvaluation.Domain.Entities;
+using AutoMapper;
+using FluentValidation;
+using Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
 
-namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
+namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSaleItem;
 
 /// <summary>
-/// Handler for processing CreateProductCommand requests
+/// Handler for processing CreateSaleItemCommand requests.
 /// </summary>
 public class CreateSaleItemHandler : IRequestHandler<CreateSaleItemCommand, CreateSaleItemResult>
 {
-    private readonly IProductRepository _productRepository;
+    private readonly ISaleItemRepository _saleItemRepository;
     private readonly IMapper _mapper;
 
-    public CreateSaleItemHandler(IProductRepository productRepository, IMapper mapper)
+    /// <summary>
+    /// Initializes a new instance of CreateSaleItemHandler.
+    /// </summary>
+    /// <param name="saleItemRepository">The sale item repository.</param>
+    /// <param name="mapper">The AutoMapper instance.</param>
+    public CreateSaleItemHandler(ISaleItemRepository saleItemRepository, IMapper mapper)
     {
-        _productRepository = productRepository;
+        _saleItemRepository = saleItemRepository;
         _mapper = mapper;
     }
 
-    public async Task<CreateSaleItemResult> Handle(CreateSaleItemCommand command, CancellationToken cancellationToken)
+    /// <summary>
+    /// Handles the CreateSaleItemCommand request.
+    /// </summary>
+    /// <param name="request">The CreateSaleItem command.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The created sale item details.</returns>
+    public async Task<CreateSaleItemResult> Handle(CreateSaleItemCommand request, CancellationToken cancellationToken)
     {
-        var validator = new CreateProductValidator();
-        var validationResult = await validator.ValidateAsync(command, cancellationToken);
+        // Validate the command
+        var validator = new CreateSaleItemValidator();
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
 
-        var product = _mapper.Map<Product>(command);
-        var createdProduct = await _productRepository.CreateAsync(product);
-        var result = _mapper.Map<CreateSaleItemResult>(createdProduct);
+        // Map the command to a SaleItem entity
+        var saleItem = _mapper.Map<SaleItem>(request);
+
+        // Calculate the total price of the item
+        saleItem.CalculateTotalPrice();
+
+        // Save the sale item to the database
+        var createdSaleItem = await _saleItemRepository.CreateAsync(saleItem, cancellationToken);
+
+        // Map the result to a CreateSaleItemResult
+        var result = _mapper.Map<CreateSaleItemResult>(createdSaleItem);
+
         return result;
     }
 }
-
-
-
-
-
-
-
-
-
-

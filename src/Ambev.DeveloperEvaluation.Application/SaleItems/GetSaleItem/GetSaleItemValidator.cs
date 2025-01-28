@@ -1,29 +1,19 @@
 ﻿using FluentValidation;
 
-namespace Ambev.DeveloperEvaluation.Application.Products.GetProduct;
+namespace Ambev.DeveloperEvaluation.Application.Sales.GetSaleItem;
 
 /// <summary>
-/// Validator for GetProductCommand
+/// Validator for GetSaleItemCommand.
 /// </summary>
 public class GetSaleItemValidator : AbstractValidator<GetSaleItemCommand>
 {
     /// <summary>
-    /// Initializes validation rules for GetProductCommand
+    /// Initializes validation rules for GetSaleItemCommand.
     /// </summary>
     public GetSaleItemValidator()
     {
         RuleFor(x => x.Id)
-            .NotEmpty().WithMessage("Product ID is required");
+            .NotEmpty()
+            .WithMessage("Sale item ID is required.");
     }
 }
-
-
-
-
-
-
-
-
-
-
-

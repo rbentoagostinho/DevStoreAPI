@@ -1,26 +1,42 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Entities;
-using AutoMapper;
-
-namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
+﻿namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSaleItem;
 
 /// <summary>
-/// Mapping profile for CreateProductCommand and CreateProductResult
+/// Represents the response returned after successfully creating a new sale item.
 /// </summary>
-public class CreateSaleItemProfile : Profile
+public class CreateSaleItemResult
 {
-    public CreateSaleItemProfile()
-    {
-        CreateMap<CreateSaleItemCommand, Product>();
-        CreateMap<Product, CreateSaleItemResult>();
-    }
+    /// <summary>
+    /// Gets or sets the unique identifier of the newly created sale item.
+    /// </summary>
+    public Guid Id { get; set; }
+
+    /// <summary>
+    /// Gets or sets the sale ID.
+    /// </summary>
+    public Guid SaleId { get; set; }
+
+    /// <summary>
+    /// Gets or sets the product ID.
+    /// </summary>
+    public Guid ProductId { get; set; }
+
+    /// <summary>
+    /// Gets or sets the product name.
+    /// </summary>
+    public string ProductName { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the quantity of the product.
+    /// </summary>
+    public int Quantity { get; set; }
+
+    /// <summary>
+    /// Gets or sets the unit price of the product.
+    /// </summary>
+    public decimal UnitPrice { get; set; }
+
+    /// <summary>
+    /// Gets or sets the total price of the item.
+    /// </summary>
+    public decimal TotalPrice { get; set; }
 }
-
-
-
-
-
-
-
-
-
-

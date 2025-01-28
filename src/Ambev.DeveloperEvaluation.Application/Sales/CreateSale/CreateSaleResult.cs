@@ -1,24 +1,27 @@
-﻿namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
+﻿namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 
 /// <summary>
-/// Result model for CreateProduct operation
+/// Represents the response returned after successfully creating a new sale.
 /// </summary>
-public class CreateSaleItemResult
+public class CreateSaleResult
 {
+    /// <summary>
+    /// Gets or sets the unique identifier of the newly created sale.
+    /// </summary>
     public Guid Id { get; set; }
-    public string Title { get; set; }
-    public string Description { get; set; }
-    public decimal Price { get; set; }
-    public string Category { get; set; }
-    public string Image { get; set; }
+
+    /// <summary>
+    /// Gets or sets the sale number.
+    /// </summary>
+    public string SaleNumber { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the total amount of the sale.
+    /// </summary>
+    public decimal TotalAmount { get; set; }
+
+    /// <summary>
+    /// Gets or sets the date and time when the sale was created.
+    /// </summary>
+    public DateTime CreatedAt { get; set; }
 }
-
-
-
-
-
-
-
-
-
-

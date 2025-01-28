@@ -1,43 +1,37 @@
 ﻿using FluentValidation;
 
-namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
+namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSaleItem;
 
 /// <summary>
-/// Validator for CreateProductCommand
+/// Validator for CreateSaleItemCommand.
 /// </summary>
 public class CreateSaleItemValidator : AbstractValidator<CreateSaleItemCommand>
 {
     /// <summary>
-    /// Initializes validation rules for CreateProductCommand
+    /// Initializes validation rules for CreateSaleItemCommand.
     /// </summary>
     public CreateSaleItemValidator()
     {
-        RuleFor(x => x.Title)
-            .NotEmpty().WithMessage("Title is required")
-            .MinimumLength(3).WithMessage("Title must be at least 3 characters long")
-            .MaximumLength(100).WithMessage("Title cannot be longer than 100 characters");
+        RuleFor(x => x.SaleId)
+            .NotEmpty()
+            .WithMessage("Sale ID is required.");
 
-        RuleFor(x => x.Description)
-            .MaximumLength(500).WithMessage("Description cannot be longer than 500 characters");
+        RuleFor(x => x.ProductId)
+            .NotEmpty()
+            .WithMessage("Product ID is required.");
 
-        RuleFor(x => x.Price)
-            .GreaterThan(0).WithMessage("Price must be a positive value");
+        RuleFor(x => x.ProductName)
+            .NotEmpty()
+            .WithMessage("Product name is required.")
+            .MaximumLength(100)
+            .WithMessage("Product name must not exceed 100 characters.");
 
-        RuleFor(x => x.Category)
-            .NotEmpty().WithMessage("Category is required")
-            .MaximumLength(50).WithMessage("Category cannot be longer than 50 characters");
+        RuleFor(x => x.Quantity)
+            .GreaterThan(0)
+            .WithMessage("Quantity must be greater than 0.");
 
-        RuleFor(x => x.Image)
-            .MaximumLength(200).WithMessage("Image URL cannot be longer than 200 characters");
+        RuleFor(x => x.UnitPrice)
+            .GreaterThan(0)
+            .WithMessage("Unit price must be greater than 0.");
     }
 }
-
-
-
-
-
-
-
-
-
-

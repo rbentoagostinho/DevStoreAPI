@@ -1,37 +1,53 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Repositories;
+﻿using MediatR;
+using Ambev.DeveloperEvaluation.Domain.Repositories;
 using AutoMapper;
-using MediatR;
+using FluentValidation;
 
-namespace Ambev.DeveloperEvaluation.Application.Products.GetProduct;
+namespace Ambev.DeveloperEvaluation.Application.Sales.GetSale;
 
 /// <summary>
-/// Handler for GetProductCommand
+/// Handler for processing GetSaleCommand requests.
 /// </summary>
-public class GetSaleItemHandler : IRequestHandler<GetSaleItemCommand, GetSaleItemResult>
+public class GetSaleHandler : IRequestHandler<GetSaleCommand, GetSaleResult>
 {
-    private readonly IProductRepository _productRepository;
+    private readonly ISaleRepository _saleRepository;
     private readonly IMapper _mapper;
 
-    public GetSaleItemHandler(IProductRepository productRepository, IMapper mapper)
+    /// <summary>
+    /// Initializes a new instance of GetSaleHandler.
+    /// </summary>
+    /// <param name="saleRepository">The sale repository.</param>
+    /// <param name="mapper">The AutoMapper instance.</param>
+    public GetSaleHandler(ISaleRepository saleRepository, IMapper mapper)
     {
-        _productRepository = productRepository;
+        _saleRepository = saleRepository;
         _mapper = mapper;
     }
 
-    public async Task<GetSaleItemResult> Handle(GetSaleItemCommand request, CancellationToken cancellationToken)
+    /// <summary>
+    /// Handles the GetSaleCommand request.
+    /// </summary>
+    /// <param name="request">The GetSale command.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The sale details if found.</returns>
+    public async Task<GetSaleResult> Handle(GetSaleCommand request, CancellationToken cancellationToken)
     {
-        var product = await _productRepository.GetByIdAsync(request.Id);
-        return _mapper.Map<GetSaleItemResult>(product);
+        // Validate the command
+        var validator = new GetSaleValidator();
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+            throw new ValidationException(validationResult.Errors);
+
+        // Retrieve the sale from the repository
+        var sale = await _saleRepository.GetByIdAsync(request.Id);
+
+        if (sale == null)
+            throw new KeyNotFoundException($"Sale with ID {request.Id} not found.");
+
+        // Map the sale to the result
+        var result = _mapper.Map<GetSaleResult>(sale);
+
+        return result;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
