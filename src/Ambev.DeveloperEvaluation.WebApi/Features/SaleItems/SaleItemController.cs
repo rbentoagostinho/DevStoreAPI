@@ -8,6 +8,7 @@ using Ambev.DeveloperEvaluation.WebApi.Models;
 
 using Ambev.DeveloperEvaluation.Application.SaleItems.CreateSaleItem;
 using Ambev.DeveloperEvaluation.Application.SaleItems.GetSaleItem;
+using Ambev.DeveloperEvaluation.WebApi.Features.SaleItems.CreateSaleItem;
 
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.SaleItems;

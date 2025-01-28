@@ -1,5 +1,6 @@
 ﻿
 namespace Ambev.DeveloperEvaluation.WebApi.Features.SaleItems.CreateSaleItem;
+
 /// <summary>
 /// Represents the response returned after successfully creating a new product.
 /// </summary>

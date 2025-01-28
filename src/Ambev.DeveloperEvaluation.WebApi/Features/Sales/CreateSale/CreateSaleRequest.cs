@@ -1,4 +1,5 @@
-﻿namespace Ambev.DeveloperEvaluation.WebApi.Models;
+﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
+          
 
 /// <summary>
 /// Represents the request to create a new product.

@@ -1,7 +1,10 @@
-﻿using Ambev.DeveloperEvaluation.WebApi.Models;
-using FluentValidation;
+﻿using FluentValidation;
+using Ambev.DeveloperEvaluation.Domain.Validation;
+using Ambev.DeveloperEvaluation.WebApi.Features.SaleItems.CreateSaleItem;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.SaleItems.CreateSaleItems;
+
+
 
 /// <summary>
 /// Validator for CreateProductRequest that defines validation rules for product creation.
