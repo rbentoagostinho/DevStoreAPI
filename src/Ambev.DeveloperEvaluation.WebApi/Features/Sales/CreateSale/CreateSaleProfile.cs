@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
-using Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
-using Ambev.DeveloperEvaluation.WebApi.Models;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 

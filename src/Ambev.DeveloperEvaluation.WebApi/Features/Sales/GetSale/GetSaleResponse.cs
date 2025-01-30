@@ -1,4 +1,5 @@
-﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSale;
+﻿using Ambev.DeveloperEvaluation.WebApi.Features.SaleItems.GetSaleItems;
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSale;
 
 /// <summary>
 /// API response model for GetSale operation
@@ -43,7 +44,9 @@ public class GetSaleResponse
     /// <summary>
     /// The list of items in the sale
     /// </summary>
-    public List<SaleItemResponse> Items { get; set; } = new List<SaleItemResponse>();
+    /// 
+
+    public List<GetSaleItemResponse> Items { get; set; } = new List<GetSaleItemResponse>();
 
     /// <summary>
     /// Indicates whether the sale is cancelled

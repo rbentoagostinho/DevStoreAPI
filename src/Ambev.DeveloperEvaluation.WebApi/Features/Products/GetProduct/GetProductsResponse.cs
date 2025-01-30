@@ -3,7 +3,7 @@
     /// <summary>
     /// Response model for getting a product
     /// </summary>
-    public class GetSaleResponse
+    public class GetProductsResponse
     {
         /// <summary>
         /// The unique identifier of the product

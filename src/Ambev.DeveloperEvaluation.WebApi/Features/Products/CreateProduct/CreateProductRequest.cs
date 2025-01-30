@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents the request to create a new product.
 /// </summary>
-public class CreateSaleRequest
+public class CreateProductRequest
 {
     /// <summary>
     /// Gets or sets the product title.

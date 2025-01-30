@@ -1,4 +1,6 @@
-﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
+﻿using Ambev.DeveloperEvaluation.WebApi.Features.SaleItems.GetSaleItems;
+
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 
 /// <summary>
 /// API response model for CreateSale operation
@@ -12,5 +14,5 @@ public class CreateSaleResponse
     public string CustomerName { get; set; } = string.Empty;
     public string Branch { get; set; } = string.Empty;
     public decimal TotalAmount { get; set; }
-    public List<SaleItemResponse> Items { get; set; } = new List<SaleItemResponse>();
+    public List<GetSaleItemResponse> Items { get; set; } = new List<GetSaleItemResponse>();
 }

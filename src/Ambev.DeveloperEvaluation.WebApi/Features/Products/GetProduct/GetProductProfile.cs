@@ -12,7 +12,7 @@ public class GetSaleProfile : Profile
 {
     public GetSaleProfile()
     {
-        CreateMap<Product, GetSaleResponse>()
+        CreateMap<Product, GetProductsResponse>()
             .ForMember(dest => dest.Rating, opt => opt.MapFrom(src => new RatingResponse
             {
                 Rate = src.Rating.Rate,

@@ -6,7 +6,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
 /// <summary>
 /// Validator for CreateProductRequest that defines validation rules for product creation.
 /// </summary>
-public class CreateSaleRequestValidator : AbstractValidator<CreateSaleRequest>
+public class CreateProductRequestValidator : AbstractValidator<CreateProductRequest>
 {
     /// <summary>
     /// Initializes a new instance of the CreateProductRequestValidator with defined validation rules.
@@ -20,7 +20,7 @@ public class CreateSaleRequestValidator : AbstractValidator<CreateSaleRequest>
     /// - Image: Required, must be a valid URL, length up to 200 characters
     /// - Rating: Must have valid Rate and Count
     /// </remarks>
-    public CreateSaleRequestValidator()
+    public CreateProductRequestValidator()
     {
         RuleFor(product => product.Title)
             .NotEmpty().WithMessage("Title is required")

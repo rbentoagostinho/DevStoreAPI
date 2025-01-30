@@ -9,7 +9,7 @@ public class CreateProductRequestProfile : Profile
 {
     public CreateProductRequestProfile()
     {
-        CreateMap<CreateSaleRequest, CreateSaleItemCommand>();
+        CreateMap<CreateProductRequest, CreateProductCommand>();
     }
 }
 

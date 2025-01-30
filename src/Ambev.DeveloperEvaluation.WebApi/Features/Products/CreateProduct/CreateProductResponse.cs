@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents the response returned after successfully creating a new product.
 /// </summary>
-public class CreateSaleResponse
+public class CreateProductResponse
 {
     /// <summary>
     /// Gets or sets the unique identifier of the newly created product.

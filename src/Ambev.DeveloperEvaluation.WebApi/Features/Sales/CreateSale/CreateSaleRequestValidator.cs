@@ -1,7 +1,5 @@
 ﻿using FluentValidation;
-using Ambev.DeveloperEvaluation.Domain.Enums;
-using Ambev.DeveloperEvaluation.WebApi.Models;
-
+using Ambev.DeveloperEvaluation.Domain.Validation;
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 
 /// <summary>
