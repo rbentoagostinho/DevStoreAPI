@@ -10,15 +10,3 @@ public class DeleteProductResponse
     /// </summary>
     public bool Success { get; set; }
 }
-
-
-
-
-
-
-
-
-
-
-
-

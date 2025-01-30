@@ -30,8 +30,6 @@ public class CreateProductHandler : IRequestHandler<CreateProductCommand, Create
 
         var product = _mapper.Map<Product>(command);
         var createdProduct = await _productRepository.CreateAsync(product);
-
-        // Corrigido para mapear para CreateProductResult
         return _mapper.Map<CreateProductResult>(createdProduct);
     }
 }

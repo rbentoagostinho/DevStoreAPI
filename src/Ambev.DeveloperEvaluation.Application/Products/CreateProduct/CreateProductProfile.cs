@@ -1,10 +1,10 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Entities;
-using AutoMapper;
+﻿using AutoMapper;
+using Ambev.DeveloperEvaluation.Domain.Entities;
 
 namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
 
 /// <summary>
-/// Mapping profile for CreateProductCommand and CreateProductResult
+/// Profile for mapping between Product entity and CreateProductResponse
 /// </summary>
 public class CreateProductProfile : Profile
 {
@@ -14,13 +14,3 @@ public class CreateProductProfile : Profile
         CreateMap<Product, CreateProductResult>();
     }
 }
-
-
-
-
-
-
-
-
-
-

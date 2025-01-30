@@ -1,26 +1,15 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Entities;
-using AutoMapper;
+﻿using AutoMapper;
+using Ambev.DeveloperEvaluation.Domain.Entities;
 
 namespace Ambev.DeveloperEvaluation.Application.Products.GetProduct;
 
 /// <summary>
-/// Mapping profile for GetProductCommand and GetProductResult
+/// Profile for mapping between Product entity and GetProductResult
 /// </summary>
-public class GetSaleItemProfile : Profile
+public class GetProductProfile : Profile
 {
-    public GetSaleItemProfile()
+    public GetProductProfile()
     {
-        CreateMap<Product, GetSaleItemResult>();
+        CreateMap<Product, GetProductResult>();
     }
 }
-
-
-
-
-
-
-
-
-
-
-

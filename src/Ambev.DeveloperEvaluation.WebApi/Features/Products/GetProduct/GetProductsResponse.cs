@@ -1,59 +1,47 @@
-﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProduct
+﻿using Ambev.DeveloperEvaluation.Domain.Entities;
+
+/// <summary>
+/// API response model for GetProduct operation
+/// </summary>
+public class GetProductResponse
 {
     /// <summary>
-    /// Response model for getting a product
+    /// The unique identifier of the product
     /// </summary>
-    public class GetProductsResponse
-    {
-        /// <summary>
-        /// The unique identifier of the product
-        /// </summary>
-        public Guid Id { get; set; }
-
-        /// <summary>
-        /// The title of the product
-        /// </summary>
-        public string Title { get; set; } = string.Empty;
-
-        /// <summary>
-        /// The description of the product
-        /// </summary>
-        public string Description { get; set; } = string.Empty;
-
-        /// <summary>
-        /// The price of the product
-        /// </summary>
-        public decimal Price { get; set; }
-
-        /// <summary>
-        /// The category of the product
-        /// </summary>
-        public string Category { get; set; } = string.Empty;
-
-        /// <summary>
-        /// The image URL of the product
-        /// </summary>
-        public string Image { get; set; } = string.Empty;
-
-        /// <summary>
-        /// The rating of the product
-        /// </summary>
-        public GetProductRatingResponse Rating { get; set; } = new GetProductRatingResponse();
-    }
+    public Guid Id { get; set; }
 
     /// <summary>
-    /// Represents the rating of a product in the response
+    /// The product title
     /// </summary>
-    public class GetProductRatingResponse
-    {
-        /// <summary>
-        /// The rating value
-        /// </summary>
-        public decimal Rate { get; set; }
+    public string Title { get; set; } = string.Empty;
 
-        /// <summary>
-        /// The count of ratings
-        /// </summary>
-        public int Count { get; set; }
-    }
+    /// <summary>
+    /// The product description
+    /// </summary>
+    public string Description { get; set; } = string.Empty;
+
+    /// <summary>
+    /// The product price
+    /// </summary>
+    public decimal Price { get; set; }
+
+    /// <summary>
+    /// The product category
+    /// </summary>
+    public string Category { get; set; } = string.Empty;
+
+    /// <summary>
+    /// The product image URL
+    /// </summary>
+    public string Image { get; set; } = string.Empty;
+
+    /// <summary>
+    /// The product rating information
+    /// </summary>
+    public Rating Rating { get; set; } = new Rating();
+
+    /// <summary>
+    /// The date when the product was created
+    /// </summary>
+    public DateTime CreatedAt { get; set; }
 }

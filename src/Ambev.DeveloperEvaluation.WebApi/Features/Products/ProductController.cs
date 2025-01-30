@@ -8,6 +8,9 @@ using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProduct;
 using Ambev.DeveloperEvaluation.WebApi.Models;
+using Ambev.DeveloperEvaluation.Application.Products.GetProduct;
+using Ambev.DeveloperEvaluation.Application.Products.GetAllProducts;
+using Ambev.DeveloperEvaluation.WebApi.Features.Products.GetAllProducts;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Products;
 
@@ -20,46 +23,43 @@ public class ProductsController : BaseController
 {
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
-    private readonly IProductRepository _productRepository;
 
     /// <summary>
     /// Initializes a new instance of ProductsController
     /// </summary>
     /// <param name="mediator">The mediator instance</param>
     /// <param name="mapper">The AutoMapper instance</param>
-    /// <param name="productRepository">The product repository instance</param>
-    public ProductsController(IMediator mediator, IMapper mapper, IProductRepository productRepository)
+    public ProductsController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
         _mapper = mapper;
-        _productRepository = productRepository;
     }
 
     /// <summary>
-    /// Creates a new product
+    /// Retrieves all products with pagination
     /// </summary>
-    /// <param name="request">The product creation request</param>
+    /// <param name="request">The request parameters for pagination and ordering</param>
     /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>The created product details</returns>
-    [HttpPost]
-    [ProducesResponseType(typeof(ApiResponseWithData<CreateProductResponse>), StatusCodes.Status201Created)]
+    /// <returns>A list of products</returns>
+    [HttpGet]
+    [ProducesResponseType(typeof(ApiResponseWithData<IEnumerable<GetProductResponse>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateProduct([FromBody] CreateProductRequest request, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetAll([FromQuery] GetAllProductsRequest request, CancellationToken cancellationToken)
     {
-        var validator = new CreateProductRequestValidator();
+        var validator = new GetAllProductsRequestValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
         if (!validationResult.IsValid)
             return BadRequest(validationResult.Errors);
 
-        var command = _mapper.Map<CreateProductCommand>(request);
-        var response = await _mediator.Send(command, cancellationToken);
+        var command = _mapper.Map<GetAllProductsCommand>(request);
+        var products = await _mediator.Send(command, cancellationToken);
 
-        return Created(string.Empty, new ApiResponseWithData<CreateProductResponse>
+        return Ok(new ApiResponseWithData<IEnumerable<GetProductResponse>>
         {
             Success = true,
-            Message = "Product created successfully",
-            Data = _mapper.Map<CreateProductResponse>(response)
+            Message = "Products retrieved successfully",
+            Data = _mapper.Map<IEnumerable<GetProductResponse>>(products)
         });
     }
 
@@ -70,87 +70,26 @@ public class ProductsController : BaseController
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The product details if found</returns>
     [HttpGet("{id}")]
-    [ProducesResponseType(typeof(ApiResponseWithData<CreateProductResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponseWithData<GetProductResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetProduct([FromRoute] Guid id, CancellationToken cancellationToken)
     {
-        var product = await _productRepository.GetByIdAsync(id);
-        if (product == null)
-        {
-            return NotFound(new ApiResponse
-            {
-                Success = false,
-                Message = "Product not found"
-            });
-        }
+        var request = new GetProductRequest { Id = id };
+        var validator = new GetProductRequestValidator();
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
-        var response = _mapper.Map<GetProductsResponse>(product);
-        return Ok(new ApiResponseWithData<GetProductsResponse>
+        if (!validationResult.IsValid)
+            return BadRequest(validationResult.Errors);
+
+        var command = _mapper.Map<GetProductCommand>(request);
+        var response = await _mediator.Send(command, cancellationToken);
+
+        return Ok(new ApiResponseWithData<GetProductResponse>
         {
             Success = true,
             Message = "Product retrieved successfully",
-            Data = response
-        });
-    }
-
-    /// <summary>
-    /// Retrieves a list of products with pagination and sorting
-    /// </summary>
-    /// <param name="_page">Page number for pagination</param>
-    /// <param name="_size">Number of items per page</param>
-    /// <param name="_order">Ordering of results (e.g., "price desc, title asc")</param>
-    /// <returns>A paginated list of products</returns>
-    [HttpGet("all")]
-    [ProducesResponseType(typeof(ApiResponseWithData<IEnumerable<GetProductsResponse>>), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> GetAllProducts(CancellationToken cancellationToken, [FromQuery] int _page = 1, [FromQuery] int _size = 10, [FromQuery] string _order = "")
-    {
-        var products = await _productRepository.GetAllAsync(_page, _size, _order, cancellationToken);
-        var response = _mapper.Map<IEnumerable<GetProductsResponse>>(products);
-        return Ok(new ApiResponseWithData<IEnumerable<GetProductsResponse>>
-        {
-            Success = true,
-            Message = "Products retrieved successfully",
-            Data = response
-        });
-    }
-
-
-
-
-
-
-    /// <summary>
-    /// Deletes a product by its ID
-    /// </summary>
-    /// <param name="id">The unique identifier of the product to delete</param>
-    /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>Success response if the product was deleted</returns>
-    [HttpDelete("{id}")]
-    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> DeleteProduct([FromRoute] Guid id, CancellationToken cancellationToken)
-    {
-        var product = await _productRepository.GetByIdAsync(id);
-        if (product == null)
-        {
-            return NotFound(new ApiResponse
-            {
-                Success = false,
-                Message = "Product not found"
-            });
-        }
-
-        await _productRepository.DeleteAsync(id);
-        return Ok(new ApiResponse
-        {
-            Success = true,
-            Message = "Product deleted successfully"
+            Data = _mapper.Map<GetProductResponse>(response)
         });
     }
 }
-
-
-

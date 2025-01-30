@@ -1,20 +1,17 @@
 ﻿using FluentValidation;
 
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProduct;
-
 /// <summary>
-/// Validator for GetProductsRequest that defines validation rules for getting a product
+/// Validator for GetProductRequest
 /// </summary>
-public class GetSaleRequestValidator : AbstractValidator<GetSaleRequest>
+public class GetProductRequestValidator : AbstractValidator<GetProductRequest>
 {
     /// <summary>
-    /// Initializes a new instance of the GetProductsRequestValidator with defined validation rules.
+    /// Initializes validation rules for GetProductRequest
     /// </summary>
-    public GetSaleRequestValidator()
+    public GetProductRequestValidator()
     {
-        RuleFor(request => request.Id).NotEmpty().WithMessage("Product ID is required");
+        RuleFor(x => x.Id)
+            .NotEmpty()
+            .WithMessage("Product ID is required");
     }
 }
-
-
-

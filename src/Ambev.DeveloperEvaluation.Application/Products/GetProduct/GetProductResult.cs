@@ -1,25 +1,32 @@
 ﻿namespace Ambev.DeveloperEvaluation.Application.Products.GetProduct;
 
 /// <summary>
-/// Result model for GetProduct operation
+/// Response model for GetProduct operation
 /// </summary>
-public class GetSaleItemResult
+public class GetProductResult
 {
+    /// <summary>
+    /// The unique identifier of the product
+    /// </summary>
     public Guid Id { get; set; }
-    public string Title { get; set; }
-    public string Description { get; set; }
+
+    /// <summary>
+    /// The name of the product
+    /// </summary>
+    public string Name { get; set; } = string.Empty;
+
+    /// <summary>
+    /// The product's category
+    /// </summary>
+    public string Category { get; set; } = string.Empty;
+
+    /// <summary>
+    /// The price of the product
+    /// </summary>
     public decimal Price { get; set; }
-    public string Category { get; set; }
-    public string Image { get; set; }
+
+    /// <summary>
+    /// The stock quantity available
+    /// </summary>
+    public int StockQuantity { get; set; }
 }
-
-
-
-
-
-
-
-
-
-
-

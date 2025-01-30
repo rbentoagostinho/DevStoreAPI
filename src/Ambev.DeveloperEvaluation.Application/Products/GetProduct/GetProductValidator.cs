@@ -5,25 +5,12 @@ namespace Ambev.DeveloperEvaluation.Application.Products.GetProduct;
 /// <summary>
 /// Validator for GetProductCommand
 /// </summary>
-public class GetSaleItemValidator : AbstractValidator<GetSaleItemCommand>
+public class GetProductValidator : AbstractValidator<GetProductCommand>
 {
-    /// <summary>
-    /// Initializes validation rules for GetProductCommand
-    /// </summary>
-    public GetSaleItemValidator()
+    public GetProductValidator()
     {
         RuleFor(x => x.Id)
-            .NotEmpty().WithMessage("Product ID is required");
+            .NotEmpty()
+            .WithMessage("Product ID is required");
     }
 }
-
-
-
-
-
-
-
-
-
-
-

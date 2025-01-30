@@ -1,34 +1,18 @@
-﻿using MediatR;
+﻿using Ambev.DeveloperEvaluation.Domain.Entities;
+using MediatR;
 
 namespace Ambev.DeveloperEvaluation.Application.Products.GetProduct;
 
 /// <summary>
-/// Command for getting a product
+/// Command for retrieving a product by its ID
 /// </summary>
-public record GetSaleItemCommand : IRequest<GetSaleItemResult>
-{
-    /// <summary>
-    /// The unique identifier of the product to get
-    /// </summary>
-    public Guid Id { get; init; }
 
-    /// <summary>
-    /// Initializes a new instance of GetProductCommand
-    /// </summary>
-    /// <param name="id">The ID of the product to get</param>
-    public GetSaleItemCommand(Guid id)
+public class GetProductCommand : IRequest<Product>
+{
+    public Guid Id { get; }
+
+    public GetProductCommand(Guid id)
     {
         Id = id;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
