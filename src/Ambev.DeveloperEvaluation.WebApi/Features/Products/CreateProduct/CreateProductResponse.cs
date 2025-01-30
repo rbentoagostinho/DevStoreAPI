@@ -1,60 +1,49 @@
-﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
+﻿using Ambev.DeveloperEvaluation.Domain.Entities;
+
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
 
 /// <summary>
-/// Represents the response returned after successfully creating a new product.
+/// API response model for CreateProduct operation
 /// </summary>
 public class CreateProductResponse
 {
     /// <summary>
-    /// Gets or sets the unique identifier of the newly created product.
+    /// The unique identifier of the created product
     /// </summary>
     public Guid Id { get; set; }
 
     /// <summary>
-    /// Gets or sets the product title.
+    /// The product title
     /// </summary>
     public string Title { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the product description.
+    /// The product description
     /// </summary>
     public string Description { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the product price.
+    /// The product price
     /// </summary>
     public decimal Price { get; set; }
 
     /// <summary>
-    /// Gets or sets the product category.
+    /// The product category
     /// </summary>
     public string Category { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the product image URL.
+    /// The product image URL
     /// </summary>
     public string Image { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the product rating.
+    /// The product rating information
     /// </summary>
-    public RatingResponse Rating { get; set; } = new RatingResponse();
-}
-
-/// <summary>
-/// Represents the rating of a product in the response.
-/// </summary>
-public class RatingResponse
-{
-    /// <summary>
-    /// Gets or sets the rating value.
-    /// </summary>
-    public decimal Rate { get; set; }
+    public Rating Rating { get; set; } = new Rating();
 
     /// <summary>
-    /// Gets or sets the count of ratings.
+    /// The date when the product was created
     /// </summary>
-    public int Count { get; set; }
+    public DateTime CreatedAt { get; set; }
 }
-
-

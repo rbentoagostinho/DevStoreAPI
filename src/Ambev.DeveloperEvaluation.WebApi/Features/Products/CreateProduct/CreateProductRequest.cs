@@ -1,12 +1,10 @@
-﻿namespace Ambev.DeveloperEvaluation.WebApi.Models;
-
-/// <summary>
-/// Represents the request to create a new product.
+﻿/// <summary>
+/// Represents a request to create a new product in the system.
 /// </summary>
 public class CreateProductRequest
 {
     /// <summary>
-    /// Gets or sets the product title.
+    /// Gets or sets the product title. Must be unique and descriptive.
     /// </summary>
     public string Title { get; set; } = string.Empty;
 
@@ -16,7 +14,7 @@ public class CreateProductRequest
     public string Description { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the product price.
+    /// Gets or sets the product price. Must be a positive value.
     /// </summary>
     public decimal Price { get; set; }
 
@@ -31,24 +29,12 @@ public class CreateProductRequest
     public string Image { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the product rating.
+    /// Gets or sets the initial rating value.
     /// </summary>
-    public RatingRequest Rating { get; set; } = new RatingRequest();
-}
-
-/// <summary>
-/// Represents the rating of a product in the create request.
-/// </summary>
-public class RatingRequest
-{
-    /// <summary>
-    /// Gets or sets the rating value.
-    /// </summary>
-    public decimal Rate { get; set; }
+    public decimal RateValue { get; set; }
 
     /// <summary>
-    /// Gets or sets the count of ratings.
+    /// Gets or sets the initial rating count.
     /// </summary>
-    public int Count { get; set; }
+    public int RateCount { get; set; }
 }
-

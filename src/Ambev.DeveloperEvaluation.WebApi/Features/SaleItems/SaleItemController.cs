@@ -1,14 +1,9 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
-using Ambev.DeveloperEvaluation.WebApi.Common;
-using Ambev.DeveloperEvaluation.Domain.Repositories;
-using Ambev.DeveloperEvaluation.Domain.Entities;
-using Ambev.DeveloperEvaluation.WebApi.Models;
-
-using Ambev.DeveloperEvaluation.Application.SaleItems.CreateSaleItem;
+﻿using Ambev.DeveloperEvaluation.Application.SaleItems.CreateSaleItem;
 using Ambev.DeveloperEvaluation.Application.SaleItems.GetSaleItem;
 using Ambev.DeveloperEvaluation.WebApi.Features.SaleItems.CreateSaleItem;
+using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.SaleItems;
