@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿// GetSaleRequestValidator.cs
+using FluentValidation;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSale;
 

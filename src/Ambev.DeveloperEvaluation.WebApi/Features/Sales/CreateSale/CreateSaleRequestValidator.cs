@@ -1,22 +1,30 @@
-﻿using FluentValidation;
-using Ambev.DeveloperEvaluation.Domain.Validation;
+﻿// WebApi/Features/Sales/CreateSale/CreateSaleRequestValidator.cs
+using FluentValidation;
+
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 
-/// <summary>
-/// Validator for CreateSaleRequest that defines validation rules for sale creation.
-/// </summary>
 public class CreateSaleRequestValidator : AbstractValidator<CreateSaleRequest>
 {
-    /// <summary>
-    /// Initializes a new instance of the CreateSaleRequestValidator with defined validation rules.
-    /// </summary>
     public CreateSaleRequestValidator()
     {
-        RuleFor(sale => sale.SaleNumber).NotEmpty().Length(3, 20);
-        RuleFor(sale => sale.SaleDate).LessThanOrEqualTo(DateTime.UtcNow);
-        RuleFor(sale => sale.CustomerId).NotEmpty();
-        RuleFor(sale => sale.CustomerName).NotEmpty().Length(3, 100);
-        RuleFor(sale => sale.Branch).NotEmpty().Length(3, 50);
-        RuleForEach(sale => sale.Items).SetValidator(new SaleItemValidator());
+        RuleFor(x => x.CustomerName)
+            .NotEmpty()
+            .MaximumLength(100);
+
+        RuleFor(x => x.BranchName)
+            .NotEmpty()
+            .MaximumLength(100);
+
+        RuleFor(x => x.Items)
+            .NotEmpty()
+            .WithMessage("A venda deve conter pelo menos um item");
+
+        RuleForEach(x => x.Items).ChildRules(item =>
+        {
+            item.RuleFor(x => x.ProductId).NotEmpty();
+            item.RuleFor(x => x.Quantity).GreaterThan(0);
+            item.RuleFor(x => x.UnitPrice).GreaterThan(0);
+            item.RuleFor(x => x.Discount).GreaterThanOrEqualTo(0);
+        });
     }
 }

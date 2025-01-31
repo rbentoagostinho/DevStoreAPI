@@ -1,58 +1,53 @@
-using Ambev.DeveloperEvaluation.Common.Validation;
+// Domain/Entities/Sale.cs
 using Ambev.DeveloperEvaluation.Domain.Common;
-using Ambev.DeveloperEvaluation.Domain.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities;
 
-/// <summary>
-/// Represents a sale in the system with details and validation.
-/// </summary>
 public class Sale : BaseEntity
 {
+    /// <summary>
+    /// Número único da venda
+    /// </summary>
     public string SaleNumber { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Data da realização da venda
+    /// </summary>
     public DateTime SaleDate { get; set; }
-    public Guid CustomerId { get; set; }
-    public string CustomerName { get; set; } = string.Empty; // Desnormalização de descrições de entidades
+
+    /// <summary>
+    /// Cliente que realizou a compra
+    /// </summary>
+    public string CustomerName { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Filial onde a venda foi realizada
+    /// </summary>
+    public string BranchName { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Valor total da venda
+    /// </summary>
     public decimal TotalAmount { get; set; }
-    public string Branch { get; set; } = string.Empty;
-    public List<SaleItem> Items { get; set; } = new List<SaleItem>();
+
+    /// <summary>
+    /// Status de cancelamento da venda
+    /// </summary>
     public bool IsCancelled { get; set; }
 
     /// <summary>
-    /// Calculates the total amount of the sale based on the items.
+    /// Itens da venda
     /// </summary>
-    public void CalculateTotalAmount()
-    {
-        TotalAmount = Items.Sum(item => item.TotalPrice);
-    }
+    public ICollection<SaleItem> Items { get; set; } = new List<SaleItem>();
 
     /// <summary>
-    /// Performs validation of the sale entity using the SaleValidator rules.
+    /// Data de criação do registro
     /// </summary>
-    /// <returns>
-    /// A <see cref="ValidationResultDetail"/> containing:
-    /// - IsValid: Indicates whether all validation rules passed
-    /// - Errors: Collection of validation errors if any rules failed
-    /// </returns>
-    /// <remarks>
-    /// <listheader>The validation includes checking:</listheader>
-    /// <list type="bullet">Sale number format and length</list>
-    /// <list type="bullet">Sale date</list>
-    /// <list type="bullet">Customer ID</list>
-    /// <list type="bullet">Customer name format and length</list>
-    /// <list type="bullet">Branch format and length</list>
-    /// </remarks>
-    public ValidationResultDetail Validate()
-    {
-        var validator = new SaleValidator();
-        var result = validator.Validate(this);
-        return new ValidationResultDetail
-        {
-            IsValid = result.IsValid,
-            Errors = result.Errors.Select(o => (ValidationErrorDetail)o)
-        };
-    }
+    public DateTime CreatedAt { get; set; }
+
+    /// <summary>
+    /// Data da última atualização
+    /// </summary>
+    public DateTime? UpdatedAt { get; set; }
 }
-
-
-

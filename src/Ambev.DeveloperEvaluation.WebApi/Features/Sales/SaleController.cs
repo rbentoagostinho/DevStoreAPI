@@ -1,41 +1,27 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
+﻿using Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
+using Ambev.DeveloperEvaluation.Application.Sales.GetSale;
 using Ambev.DeveloperEvaluation.WebApi.Common;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSale;
-using Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
-using Ambev.DeveloperEvaluation.Application.Sales.GetSale;
+using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales;
 
-/// <summary>
-/// Controller for managing sales operations
-/// </summary>
 [ApiController]
 [Route("api/[controller]")]
-public class SaleController : BaseController
+public class SalesController : BaseController
 {
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
 
-    /// <summary>
-    /// Initializes a new instance of SaleController
-    /// </summary>
-    /// <param name="mediator">The mediator instance</param>
-    /// <param name="mapper">The AutoMapper instance</param>
-    public SaleController(IMediator mediator, IMapper mapper)
+    public SalesController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
         _mapper = mapper;
     }
 
-    /// <summary>
-    /// Creates a new sale
-    /// </summary>
-    /// <param name="request">The sale creation request</param>
-    /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>The created sale details</returns>
     [HttpPost]
     [ProducesResponseType(typeof(ApiResponseWithData<CreateSaleResponse>), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
@@ -47,26 +33,20 @@ public class SaleController : BaseController
         if (!validationResult.IsValid)
             return BadRequest(validationResult.Errors);
 
+        //Erro aqui
         var command = _mapper.Map<CreateSaleCommand>(request);
-        var response = await _mediator.Send(command, cancellationToken);
+        var result = await _mediator.Send(command, cancellationToken);
 
         return Created(string.Empty, new ApiResponseWithData<CreateSaleResponse>
         {
             Success = true,
-            Message = "Sale created successfully",
-            Data = _mapper.Map<CreateSaleResponse>(response)
+            Message = "Venda criada com sucesso",
+            Data = _mapper.Map<CreateSaleResponse>(result)
         });
     }
 
-    /// <summary>
-    /// Retrieves a sale by its ID
-    /// </summary>
-    /// <param name="id">The unique identifier of the sale</param>
-    /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>The sale details if found</returns>
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(ApiResponseWithData<GetSaleResponse>), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetSale([FromRoute] Guid id, CancellationToken cancellationToken)
     {
@@ -77,14 +57,17 @@ public class SaleController : BaseController
         if (!validationResult.IsValid)
             return BadRequest(validationResult.Errors);
 
-        var command = _mapper.Map<GetSaleCommand>(request.Id);
-        var response = await _mediator.Send(command, cancellationToken);
+        var command = _mapper.Map<GetSaleCommand>(request);
+        var result = await _mediator.Send(command, cancellationToken);
+
+        if (result == null)
+            return NotFound(new ApiResponse { Success = false, Message = "Venda não encontrada" });
 
         return Ok(new ApiResponseWithData<GetSaleResponse>
         {
             Success = true,
-            Message = "Sale retrieved successfully",
-            Data = _mapper.Map<GetSaleResponse>(response)
+            Message = "Venda encontrada com sucesso",
+            Data = _mapper.Map<GetSaleResponse>(result)
         });
     }
 }

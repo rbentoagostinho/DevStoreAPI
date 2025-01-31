@@ -1,18 +1,18 @@
-﻿using AutoMapper;
+﻿// Features/Sales/GetSale/GetSaleProfile.cs
+using Ambev.DeveloperEvaluation.Application.Sales.GetSale;
+using Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSale.Models;
+using AutoMapper;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSale;
 
-/// <summary>
-/// Profile for mapping GetSale feature requests to commands
-/// </summary>
 public class GetSaleProfile : Profile
 {
-    /// <summary>
-    /// Initializes the mappings for GetSale feature
-    /// </summary>
     public GetSaleProfile()
     {
-        CreateMap<Guid, Application.Sales.GetSale.GetSaleCommand>()
-            .ConstructUsing(id => new Application.Sales.GetSale.GetSaleCommand(id));
+        CreateMap<GetSaleRequest, GetSaleCommand>()
+            .ConstructUsing(src => new GetSaleCommand(src.Id));
+
+        CreateMap<GetSaleResult, GetSaleResponse>();
+        CreateMap<GetSaleResult.SaleItemResult, GetSaleItemResponse>();
     }
 }

@@ -1,27 +1,23 @@
 ﻿namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 
-/// <summary>
-/// Represents the response returned after successfully creating a new sale.
-/// </summary>
 public class CreateSaleResult
 {
-    /// <summary>
-    /// Gets or sets the unique identifier of the newly created sale.
-    /// </summary>
     public Guid Id { get; set; }
-
-    /// <summary>
-    /// Gets or sets the sale number.
-    /// </summary>
     public string SaleNumber { get; set; } = string.Empty;
-
-    /// <summary>
-    /// Gets or sets the total amount of the sale.
-    /// </summary>
+    public DateTime SaleDate { get; set; }
+    public string CustomerName { get; set; } = string.Empty;
+    public string BranchName { get; set; } = string.Empty;
     public decimal TotalAmount { get; set; }
+    public bool IsCancelled { get; set; }
+    public List<SaleItemResult> Items { get; set; } = new();
 
-    /// <summary>
-    /// Gets or sets the date and time when the sale was created.
-    /// </summary>
-    public DateTime CreatedAt { get; set; }
+    public class SaleItemResult
+    {
+        public Guid Id { get; set; }
+        public Guid ProductId { get; set; }
+        public int Quantity { get; set; }
+        public decimal UnitPrice { get; set; }
+        public decimal Discount { get; set; }
+        public decimal TotalAmount { get; set; }
+    }
 }

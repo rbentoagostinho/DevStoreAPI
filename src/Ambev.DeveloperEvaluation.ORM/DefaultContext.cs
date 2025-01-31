@@ -1,4 +1,5 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Entities;
+using Ambev.DeveloperEvaluation.ORM.Mapping;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +23,8 @@ namespace Ambev.DeveloperEvaluation.ORM
             // Additional model configuration
             modelBuilder.Entity<Product>()
                .OwnsOne(p => p.Rating);
+            modelBuilder.ApplyConfiguration(new SaleConfiguration());
+            modelBuilder.ApplyConfiguration(new SaleItemConfiguration());
         }
     }
 
