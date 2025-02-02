@@ -1,9 +1,15 @@
 // Domain/Entities/Sale.cs
+using Ambev.DeveloperEvaluation.Common.Validation;
 using Ambev.DeveloperEvaluation.Domain.Common;
-using System.ComponentModel.DataAnnotations;
+using Ambev.DeveloperEvaluation.Domain.Validation;
+using Microsoft.AspNetCore.Identity;
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities;
 
+/// <summary>
+/// Representa uma venda no sistema com produtos e informações de pagamento.
+/// Esta entidade segue os princípios do DDD e inclui validação de regras de negócio.
+/// </summary>
 public class Sale : BaseEntity
 {
     /// <summary>
@@ -50,4 +56,52 @@ public class Sale : BaseEntity
     /// Data da última atualização
     /// </summary>
     public DateTime? UpdatedAt { get; set; }
+
+    /// <summary>
+    /// Inicializa uma nova instância da classe Sale.
+    /// </summary>
+    public Sale()
+    {
+        CreatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Realiza a validação da entidade venda usando as regras do SaleValidator.
+    /// </summary>
+    /// <returns>
+    /// Um <see cref="ValidationResultDetail"/> contendo:
+    /// - IsValid: Indica se todas as regras de validação passaram
+    /// - Errors: Coleção de erros de validação caso alguma regra falhe
+    /// </returns>
+    public ValidationResultDetail Validate()
+    {
+        var validator = new SaleValidator();
+        var result = validator.Validate(this);
+        return new ValidationResultDetail
+        {
+            IsValid = result.IsValid,
+            Errors = result.Errors.Select(o => new ValidationErrorDetail
+            {
+                Error = o.ErrorMessage,
+                Detail = o.PropertyName
+            })
+        };
+    }
+
+    /// <summary>
+    /// Cancela a venda.
+    /// </summary>
+    public void Cancel()
+    {
+        IsCancelled = true;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Calcula o total da venda baseado nos itens.
+    /// </summary>
+    public void CalculateTotal()
+    {
+        TotalAmount = Items.Sum(item => item.TotalAmount);
+    }
 }
