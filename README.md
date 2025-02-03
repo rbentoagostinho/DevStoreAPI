@@ -32,23 +32,7 @@ A API estará disponível em:
 https://localhost:7181/swagger (HTTPS)
 http://localhost:5119/swagger (HTTP)
 
-Executando todos os testes
 
- Estrutura do Projeto
- DevStoreAPI/
-├── src/
-│   ├── Ambev.DeveloperEvaluation.Application/  # Camada de aplicação
-│   ├── Ambev.DeveloperEvaluation.Common/       # Código compartilhado
-│   ├── Ambev.DeveloperEvaluation.Domain/       # Camada de domínio
-│   ├── Ambev.DeveloperEvaluation.IoC/          # Injeção de dependência
-│   ├── Ambev.DeveloperEvaluation.ORM/          # Acesso a dados
-│   └── Ambev.DeveloperEvaluation.WebApi/       # API REST
-└── tests/
-    ├── Ambev.DeveloperEvaluation.Functional/   # Testes funcionais
-    ├── Ambev.DeveloperEvaluation.Integration/  # Testes de integração
-    └── Ambev.DeveloperEvaluation.Unit/         # Testes unitários
-
-     Regras de Negócio
 Vendas
 
 Compras acima de 4 itens idênticos têm 10% de desconto
